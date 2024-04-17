@@ -68,9 +68,14 @@ public class OrderGenerator {
 	    }		
 
 	public static void main(String[] args) {
-		int numOfOrders = Integer.parseInt(args[0]);
-		OrderGenerator orders= new OrderGenerator(numOfOrders);
-	}
+ 	   int numOfOrders = Integer.parseInt(args[0]);
+   	 OrderGenerator orders = new OrderGenerator(numOfOrders);
+  	  fillTimeOrder(orders.tOrder);
+    	fillDesiredDeliveryTimes(orders.tReq, orders.nPf);
+   	 orders.sortOrders(numOfOrders);
+   	 writeOrders(orders.num, orders.tOrder, orders.tReq, orders.nPp, orders.nPc, orders.nPs, orders.nPm, orders.nPf);
+		}
+
 
 }
 
