@@ -19,6 +19,13 @@ public class OrderGenerator {
 		this.nPm = new int[numOfOrders];
 		this.nPf = new int[numOfOrders];
 
+	static void fillTimeOrder(int[] tOrder) {
+       		 Random rand = new Random();
+       		 for (int i = 0; i < tOrder.length; i++) {
+          		  double gaussianTime = 60 * rand.nextGaussian() + 180; // Χρόνος σε λεπτά με κανονική κατανομή
+          		  tOrder[i] = (int) Math.round(gaussianTime); // Στρογγυλοποίηση στον πλησιέστερο ακέραιο
+      			  }
+   	 }
 	public void sortOrders(int numOfOrders) {
 		int tempO, tempN, tempR, tempPp, tempPc, tempPs, tempPm, tempPf;
 		for (int i = 0; i < numOfOrders-1; i++) {
