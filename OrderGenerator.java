@@ -15,7 +15,7 @@ public class OrderGenerator {
 	public OrderGenerator(int numOfOrders) {
 		this.num = new int[numOfOrders];
 		this.tOrder = fillTimeOrder(numOfOrders);
-      		 this.tReq = fillDesiredDeliveryTimes(numOfOrders, this.nPf);
+      		 this.tReq = fillDesiredDeliveryTimes(numOfOrders);
 		this.nPp = new int[numOfOrders];
 		this.nPc = new int[numOfOrders];
 		this.nPs = new int[numOfOrders];
@@ -32,7 +32,7 @@ public class OrderGenerator {
         return tOrder;
     }
 
-    public static int[] fillDesiredDeliveryTimes(int numOfOrders, int[] nPf) {
+    public static int[] fillDesiredDeliveryTimes(int numOfOrders) {
         Random rand = new Random();
         int[] tReq = new int[numOfOrders];
         for (int i = 0; i < tReq.length; i++) {
