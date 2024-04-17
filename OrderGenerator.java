@@ -22,25 +22,31 @@ public class OrderGenerator {
 		this.nPm = new int[numOfOrders];
 		this.nPf = new int[numOfOrders];
 
-	static void fillTimeOrder(int[] tOrder) {
-       		 Random rand = new Random();
-       		 for (int i = 0; i < tOrder.length; i++) {
-          		  double gaussianTime = 60 * rand.nextGaussian() + 180; // Χρόνος σε λεπτά με κανονική κατανομή
-          		  tOrder[i] = (int) Math.round(gaussianTime); // Στρογγυλοποίηση στον πλησιέστερο ακέραιο
-      			  }
-   	 }
-	static void fillDesiredDeliveryTimes(int[] tReq, int[] nPf) {
-        	Random rand = new Random();
-       		 for (int i = 0; i < tReq.length; i++) {
-           		 int deliveryTime;
-          		  if (nPf[i] > 10) {
-               		 deliveryTime = 60 + rand.nextInt(121); // Τυχαίος αριθμός από 60 έως 180 λεπτά (1-3 ώρες)
-           			 } else {
-             			   deliveryTime = 30 + rand.nextInt(151); // Τυχαίος αριθμός από 30 έως 180 λεπτά (30 λεπτά - 3 ώρες)
-           				 }
-           		 tReq[i] = deliveryTime;
-       			 }
- 	   }
+    public static int[] fillTimeOrder(int numOfOrders) {
+        Random rand = new Random();
+        int[] tOrder = new int[numOfOrders];
+        for (int i = 0; i < tOrder.length; i++) {
+            double gaussianTime = 60 * rand.nextGaussian() + 180;
+            tOrder[i] = (int) Math.round(gaussianTime);
+        }
+        return tOrder;
+    }
+
+    public static int[] fillDesiredDeliveryTimes(int numOfOrders, int[] nPf) {
+        Random rand = new Random();
+        int[] tReq = new int[numOfOrders];
+        for (int i = 0; i < tReq.length; i++) {
+            int deliveryTime;
+            if (nPf[i] > 10) {
+                deliveryTime = 60 + rand.nextInt(121);
+            } else {
+                deliveryTime = 30 + rand.nextInt(151);
+            }
+            tReq[i] = deliveryTime;
+        }
+        return tReq;
+    }
+
 	public void sortOrders(int numOfOrders) {
 		int tempO, tempN, tempR, tempPp, tempPc, tempPs, tempPm, tempPf;
 		for (int i = 0; i < numOfOrders-1; i++) {
