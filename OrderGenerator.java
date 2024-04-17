@@ -1,6 +1,7 @@
 package hw4;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Random;
 public class OrderGenerator {
 	int[] num;
 	int[] tOrder;
@@ -13,8 +14,8 @@ public class OrderGenerator {
 
 	public OrderGenerator(int numOfOrders) {
 		this.num = new int[numOfOrders];
-		this.tOrder = new int[numOfOrders];
-		this.tReq = new int[numOfOrders];
+		this.tOrder =OrderGenerator.fillTimeOrder( );
+		this.tReq =OrderGenerator.fillDesiredDeliveryTimes();
 		this.nPp = new int[numOfOrders];
 		this.nPc = new int[numOfOrders];
 		this.nPs = new int[numOfOrders];
