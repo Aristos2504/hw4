@@ -14,8 +14,8 @@ public class OrderGenerator {
 
 	public OrderGenerator(int numOfOrders) {
 		this.num = new int[numOfOrders];
-		this.tOrder =OrderGenerator.fillTimeOrder( );
-		this.tReq =OrderGenerator.fillDesiredDeliveryTimes();
+		this.tOrder = fillTimeOrder(numOfOrders);
+      		 this.tReq = fillDesiredDeliveryTimes(numOfOrders, this.nPf);
 		this.nPp = new int[numOfOrders];
 		this.nPc = new int[numOfOrders];
 		this.nPs = new int[numOfOrders];
