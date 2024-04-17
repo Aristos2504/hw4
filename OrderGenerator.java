@@ -30,6 +30,21 @@ public class OrderGenerator {
 		}
 		
 	}
+	 static void writeOrders(int[] num, int[] tOrder, int[] tReq, int[] nPp, int[] nPc, int[] nPs, int[] nPm, int[] nPf) {
+	        try {
+	            PrintWriter writer = new PrintWriter("orders.txt.");
+	            writer.println(num.length); // Εγγραφή του αριθμού των παραγγελιών
+	            for (int i = 0; i < num.length; i++) {
+	                writer.println(num[i] + " " + tOrder[i] + " " + tReq[i] + " "
+	                        + nPp[i] + " " + nPc[i] + " " + nPs[i] + " " + nPm[i] + " " + nPf[i]);
+	            }
+	            writer.close();
+	        } catch (FileNotFoundException e) {
+	            System.out.println("An error occurred while writing the orders file.");
+	            e.printStackTrace();
+	        }
+	    }		
+
 	public static void main(String[] args) {
 		int numOfOrders = Integer.parseInt(args[0]);
 		OrderGenerator orders= new OrderGenerator(numOfOrders);
