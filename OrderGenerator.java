@@ -33,7 +33,7 @@ public class OrderGenerator {
 	 static void writeOrders(int[] num, int[] tOrder, int[] tReq, int[] nPp, int[] nPc, int[] nPs, int[] nPm, int[] nPf) {
 	        try {
 	            PrintWriter writer = new PrintWriter("orders.txt.");
-	            writer.println(num.length); // Εγγραφή του αριθμού των παραγγελιών
+	            writer.println(num.length); 
 	            for (int i = 0; i < num.length; i++) {
 	                writer.println(num[i] + " " + tOrder[i] + " " + tReq[i] + " "
 	                        + nPp[i] + " " + nPc[i] + " " + nPs[i] + " " + nPm[i] + " " + nPf[i]);
