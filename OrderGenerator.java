@@ -1,4 +1,6 @@
 package hw4;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 public class OrderGenerator {
 	int[] num;
 	int[] tOrder;
