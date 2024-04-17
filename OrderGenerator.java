@@ -11,7 +11,7 @@ public class OrderGenerator {
 	int[] nPm;
 	int[] nPf;
 
-	public OrderGenerator(int numOfOrders) {//int[] num, int[] tOrder, int[] tReq, int[] nPp, int[] nPc, int[] nPs, int[] nPm, int[] nPf) {
+	public OrderGenerator(int numOfOrders) {
 		this.num = new int[numOfOrders];
 		this.tOrder = new int[numOfOrders];
 		this.tReq = new int[numOfOrders];
