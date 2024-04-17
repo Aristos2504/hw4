@@ -50,37 +50,40 @@ public class OrderGenerator {
         return tReq;
     }
 
-    public void sortOrders() {
-        int tempO, tempN, tempR, tempPp, tempPc, tempPs, tempPm, tempPf;
-        for (int i = 0; i < num.length - 1; i++) {
-            if (tOrder[i] > tOrder[i + 1]) {
-                tempO = tOrder[i];
-                tempN = num[i];
-                tempR = tReq[i];
-                tempPp = nPp[i];
-                tempPc = nPc[i];
-                tempPs = nPs[i];
-                tempPm = nPm[i];
-                tempPf = nPf[i];
-                tOrder[i] = tOrder[i + 1];
-                num[i] = num[i + 1];
-                tReq[i] = tReq[i + 1];
-                nPp[i] = nPp[i + 1];
-                nPc[i] = nPc[i + 1];
-                nPs[i] = nPs[i + 1];
-                nPm[i] = nPm[i + 1];
-                nPf[i] = nPf[i + 1];
-                tOrder[i + 1] = tempO;
-                num[i + 1] = tempN;
-                tReq[i + 1] = tempR;
-                nPp[i + 1] = tempPp;
-                nPc[i + 1] = tempPc;
-                nPs[i + 1] = tempPs;
-                nPm[i + 1] = tempPm;
-                nPf[i + 1] = tempPf;
+   public void sortOrders() {
+    for (int i = 0; i < num.length - 1; i++) {
+        for (int j = 0; j < num.length - i - 1; j++) {
+            if (tOrder[j] > tOrder[j + 1]) {
+                int tempO = tOrder[j];
+                int tempN = num[j];
+                int tempR = tReq[j];
+                int tempPp = nPp[j];
+                int tempPc = nPc[j];
+                int tempPs = nPs[j];
+                int tempPm = nPm[j];
+                int tempPf = nPf[j];
+
+                tOrder[j] = tOrder[j + 1];
+                num[j] = num[j + 1];
+                tReq[j] = tReq[j + 1];
+                nPp[j] = nPp[j + 1];
+                nPc[j] = nPc[j + 1];
+                nPs[j] = nPs[j + 1];
+                nPm[j] = nPm[j + 1];
+                nPf[j] = nPf[j + 1];
+
+                tOrder[j + 1] = tempO;
+                num[j + 1] = tempN;
+                tReq[j + 1] = tempR;
+                nPp[j + 1] = tempPp;
+                nPc[j + 1] = tempPc;
+                nPs[j + 1] = tempPs;
+                nPm[j + 1] = tempPm;
+                nPf[j + 1] = tempPf;
             }
         }
     }
+}
 
     public static void writeOrders(int[] num, int[] tOrder, int[] tReq, int[] nPp, int[] nPc, int[] nPs, int[] nPm, int[] nPf) {
         try {
