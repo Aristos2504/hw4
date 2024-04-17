@@ -12,13 +12,13 @@ public class OrderGenerator {
 	public OrderGenerator(int numOfOrders) {//int[] num, int[] tOrder, int[] tReq, int[] nPp, int[] nPc, int[] nPs, int[] nPm, int[] nPf) {
 		this.num = new int[numOfOrders];//(length?)
 		
-		this.tOrder = tOrder;
-		this.tReq = tReq;
-		this.nPp = nPp;
-		this.nPc = nPc;
-		this.nPs = nPs;
-		this.nPm = nPm;
-		this.nPf = nPf;
+		this.tOrder = new int[numOfOrders];
+		this.tReq = new int[numOfOrders];
+		this.nPp = new int[numOfOrders];
+		this.nPc = new int[numOfOrders];
+		this.nPs = new int[numOfOrders];
+		this.nPm = new int[numOfOrders];
+		this.nPf = new int[numOfOrders];
 
 	}
 	
