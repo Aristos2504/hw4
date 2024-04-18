@@ -230,7 +230,7 @@ public class OrderGenerator {
     int[] tReq = new int[numOfOrders];
     // Define the opening and closing times in minutes from 18:00 to 24:00
     int openingTime = 0; // 18:00
-    int closingTime = 1440; // 24:00
+    int closingTime = 360; // 24:00
     // Define the mean and standard deviation for the desired delivery time distribution
     int meanDeliveryTime = 60; // Mean time in minutes
     int stdDevDeliveryTime = 90; // Standard deviation
