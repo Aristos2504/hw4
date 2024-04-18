@@ -101,9 +101,7 @@ public class OrderGenerator {
 	    int friesForOnePitta = (int) (totalPittas * 0.6);
 	    int friesForNoPitta = (int) (totalPittas * 0.35);
 
-//	    System.out.println("Total Pittas: " + totalPittas);
-//	    System.out.println("Fries for 60% of Pittas: " + friesForOnePitta);
-//	    System.out.println("Fries for 35% of Pittas: " + friesForNoPitta);
+
 
 	    int pittasCovered = 0;
 	    for (int i = 0; i < pittaCounter.length; i++) {
@@ -132,14 +130,10 @@ public class OrderGenerator {
 		
 	for(int i=0;i<numOfOrders;i++) {
 			this.num[i]=i+1;
-//			System.out.print(this.num[i]+ "\t");
+
 			
 		}
-//	System.out.println();
 
-//		System.out.print(generateRandomNumber(1,4));
-//		
-//		System.out.println();
 		
 	
 	
@@ -166,44 +160,7 @@ public class OrderGenerator {
 		
 		writeOrders(this.num, this.tOrder, this.tReq, this.nPp, this.nPc, this.nPs, this.nPm, this.nPf);
 	
-//		for(int i=0;i<numOfOrders;i++) {
-//			System.out.print(nPp[i]+"\t");
-//			
-//		}
-//		
-//		System.out.println();
-//		
-//		for(int i=0;i<numOfOrders;i++) {
-//			System.out.print(nPc[i]+"\t");
-//			
-//		}
-//		
-//		System.out.println();
-//		
-//		for(int i=0;i<numOfOrders;i++) {
-//			System.out.print(nPs[i]+"\t");
-//			
-//		}
-//		
-//		System.out.println();
-//		
-//		for(int i=0;i<numOfOrders;i++) {
-//			System.out.print(nPm[i]+"\t");
-//			
-//		}
-//		System.out.println();
-//		
-////		for(int i=0;i<numOfOrders;i++) {
-////			System.out.print(pittaCounter[i]+"\t");
-////			
-////		}
-////		System.out.println();
-//		
-//		for(int i=0;i<numOfOrders;i++) {
-//			System.out.print(nPf[i]+"\t");
-//			
-//		}
-//		System.out.println();
+
 	}
 	
 	public static int[] fillTimeOrder(int numOfOrders) {
@@ -225,43 +182,42 @@ public class OrderGenerator {
 	    }
 	    return tOrder;
 	}
+	
 	public static int[] fillDesiredDeliveryTimes(int numOfOrders, int[] pittaCounter, int[] tOrder) {
-    Random rand = new Random();
-    int[] tReq = new int[numOfOrders];
-    // Define the opening and closing times in minutes from 18:00 to 24:00
-    int openingTime = 0; // 18:00
-    int closingTime = 360; // 24:00
-    // Define the mean and standard deviation for the desired delivery time distribution
-    int meanDeliveryTime = 60; // Mean time in minutes
-    int stdDevDeliveryTime = 90; // Standard deviation
+        Random rand = new Random();
+        int[] tReq = new int[numOfOrders];
+        int closingTime = 360; // Closing time in minutes (24:00)
+        int meanDeliveryTime = 60; // Mean delivery time in minutes
+        int stdDevDeliveryTime = 90; // Standard deviation
 
-    for (int i = 0; i < tReq.length; i++) {
-        // Generate a random value following Gaussian distribution
-        int deliveryTime = (int) Math.round(meanDeliveryTime + stdDevDeliveryTime * rand.nextGaussian());
-        // Adjust delivery time based on the number of pittas
-        if (pittaCounter[i] > 10) {
-            // If the number of pittas is more than 10, adjust delivery time accordingly
-            deliveryTime = Math.max(60, deliveryTime); // Ensure delivery time is not less than 60 minutes
-            deliveryTime += 30 + rand.nextInt(150); // Add additional time between 30 minutes to 3 hours
-        } else {
-            // If the number of pittas is 10 or less, adjust delivery time accordingly
-            deliveryTime = Math.max(30, deliveryTime); // Ensure delivery time is not less than 30 minutes
-            deliveryTime += 30 + rand.nextInt(180); // Add additional time between 30 minutes to 3 hours
+        for (int i = 0; i < tReq.length; i++) {
+            int deliveryTime = (int) Math.round(meanDeliveryTime + stdDevDeliveryTime * rand.nextGaussian());
+
+            if (pittaCounter[i] > 10) {
+                deliveryTime += rand.nextInt(121) + 30; // Additional time between 30 minutes to 2 hours and 30 minutes
+            } else {
+                deliveryTime += rand.nextInt(151) + 30; // Additional time between 30 minutes to 3 hours and 30 minutes
+            }
+
+            // Ensure the delivery time does not exceed closing time
+            int maxDeliveryTime = closingTime - tOrder[i];
+            deliveryTime = Math.min(deliveryTime, maxDeliveryTime);
+
+            // Ensure the delivery time is at least 30 minutes more than tOrder
+            tReq[i] = tOrder[i] + Math.max(deliveryTime, 30);
         }
-        // Ensure the delivery time does not exceed closing time (24:00)
-        tReq[i] = Math.min(closingTime, tOrder[i] + deliveryTime);
+        return tReq;
     }
-    return tReq;
-}
 
 
+ 
 
+	
    public void sortOrders() {
     for (int i = 0; i < num.length - 1; i++) {
         for (int j = 0; j < num.length - i - 1; j++) {
             if (tOrder[j] > tOrder[j + 1]) {
                 int tempO = tOrder[j];
-                int tempN = num[j];
                 int tempR = tReq[j];
                 int tempPp = nPp[j];
                 int tempPc = nPc[j];
@@ -270,7 +226,6 @@ public class OrderGenerator {
                 int tempPf = nPf[j];
 
                 tOrder[j] = tOrder[j + 1];
-                num[j] = num[j + 1];
                 tReq[j] = tReq[j + 1];
                 nPp[j] = nPp[j + 1];
                 nPc[j] = nPc[j + 1];
@@ -279,7 +234,6 @@ public class OrderGenerator {
                 nPf[j] = nPf[j + 1];
 
                 tOrder[j + 1] = tempO;
-                num[j + 1] = tempN;
                 tReq[j + 1] = tempR;
                 nPp[j + 1] = tempPp;
                 nPc[j + 1] = tempPc;
