@@ -1,5 +1,17 @@
 package hw4;
 
+/**
+ * 
+ * The OrderGenerator class generates orders for a restaurant, including details such as order time,
+ * desired delivery time, and the number of each type of pitta in the order.
+ * 
+ * @authors Andreas Hadjittofi, Aristos Charalambous
+ * @version 1.0
+ * @since 11/04/2024
+ * 
+ * Last updated: 18/04/2024
+ */
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Random;
@@ -14,6 +26,12 @@ public class OrderGenerator {
 	int[] nPm;
 	int[] nPf;
 	int[] pittaCounter;
+	
+	/**
+     * Constructs an OrderGenerator object with arrays initialized to the given number of orders.
+     * 
+     * @param numOfOrders The number of orders to generate.
+     */
 
 	public OrderGenerator(int numOfOrders) {
 		this.num = new int[numOfOrders];
@@ -26,6 +44,14 @@ public class OrderGenerator {
 		this.nPf = new int[numOfOrders];
 		this.pittaCounter= new int[numOfOrders];
 	}
+	
+	/**
+	 * Generates a random number between x and y (inclusive).
+	 * 
+	 * @param x The lower bound of the random number range.
+	 * @param y The upper bound of the random number range.
+	 * @return A random integer between x and y (inclusive).
+	 */
 	
 	public static int generateRandomNumber(int x, int y) {
         // Check if x is greater than y
@@ -44,6 +70,14 @@ public class OrderGenerator {
         
         return randomNumber;
     }
+	
+	/**
+	 * Adds a specified number of pittas to each order within the given range of orders.
+	 * 
+	 * @param x The start index of the range of orders.
+	 * @param y The end index of the range of orders.
+	 * @param num The number of pittas to add to each order.
+	 */
 	
 	public   void addPitta(int x, int y, int num) {
 		int random;
@@ -69,6 +103,13 @@ public class OrderGenerator {
 		
 	}
 	
+	/**
+	 * Adds a random number of pittas (between 5 and 20) to each order within the given range of orders.
+	 * 
+	 * @param x The start index of the range of orders.
+	 * @param y The end index of the range of orders.
+	 */
+	
 	public   void addMorePitta(int x, int y) {
 		int random;
 		int num;
@@ -92,6 +133,10 @@ public class OrderGenerator {
 			}
 		}
 	}
+	
+	/**
+	 * Calculates the number of fries to add to each order based on the number of pittas.
+	 */
 	
 	public void addFries() {
 	    int totalPittas = 0;
@@ -118,7 +163,12 @@ public class OrderGenerator {
 
 
 
-
+	/**
+	 * Generates orders based on the specified number of orders and populates the arrays
+	 * with order details such as order time, desired delivery time, and the number of each type of pitta.
+	 * 
+	 * @param numOfOrders The number of orders to generate.
+	 */
 	
 	public void generateOrders(int numOfOrders) {
 		int onePitta= (int)(numOfOrders *0.2);
@@ -163,6 +213,14 @@ public class OrderGenerator {
 
 	}
 	
+	/**
+	 * Generates random order times for the specified number of orders,
+	 * following a Gaussian distribution with a mean of 21:00 (180 minutes) and a standard deviation of 60 minutes.
+	 * 
+	 * @param numOfOrders The number of orders for which to generate order times.
+	 * @return An array containing the generated order times.
+	 */
+	
 	public static int[] fillTimeOrder(int numOfOrders) {
 	    Random rand = new Random();
 	    int[] tOrder = new int[numOfOrders];
@@ -182,6 +240,15 @@ public class OrderGenerator {
 	    }
 	    return tOrder;
 	}
+	
+	/**
+	 * Fills an array with desired delivery times for each order based on the number of pittas in each order.
+	 * 
+	 * @param numOfOrders The number of orders for which to generate desired delivery times.
+	 * @param pittaCounter An array containing the number of each type of pitta in each order.
+	 * @param tOrder An array containing the order times for each order.
+	 * @return An array containing the desired delivery times for each order.
+	 */
 	
 	public static int[] fillDesiredDeliveryTimes(int numOfOrders, int[] pittaCounter, int[] tOrder) {
         Random rand = new Random();
@@ -210,7 +277,9 @@ public class OrderGenerator {
     }
 
 
- 
+	/**
+	 * Sorts the orders based on their order times in ascending order.
+	 */
 
 	
    public void sortOrders() {
@@ -244,6 +313,19 @@ public class OrderGenerator {
         }
     }
 }
+   
+   /**
+    * Writes the order details to a file named "orders.txt".
+    * 
+    * @param num An array containing the order numbers.
+    * @param tOrder An array containing the order times.
+    * @param tReq An array containing the desired delivery times.
+    * @param nPp An array containing the number of "Pp" pittas in each order.
+    * @param nPc An array containing the number of "Pc" pittas in each order.
+    * @param nPs An array containing the number of "Ps" pittas in each order.
+    * @param nPm An array containing the number of "Pm" pittas in each order.
+    * @param nPf An array containing the number of fries in each order.
+    */
 
     public static void writeOrders(int[] num, int[] tOrder, int[] tReq, int[] nPp, int[] nPc, int[] nPs, int[] nPm, int[] nPf) {
         try {
@@ -261,6 +343,12 @@ public class OrderGenerator {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * The main method that generates orders based on the specified number of orders provided as a command-line argument.
+     * 
+     * @param args Command-line arguments (expects a single argument: the number of orders to generate).
+     */
 	
 	public static void main(String[] args) {
 		int numOfOrders = Integer.parseInt(args[0]);
