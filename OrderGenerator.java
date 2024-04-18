@@ -243,15 +243,17 @@ public class OrderGenerator {
         // Adjust delivery time based on the number of pittas
         if (pittaCounter[i] > 10) {
             // If the number of pittas is more than 10, delivery time can't be later than 3 hours from order time
-            deliveryTime += Math.min(180, tOrder[i] + 180);
+            deliveryTime += 30 + rand.nextInt(150);
         } else {
             // If the number of pittas is 10 or less, delivery time can't be later than 3 hours from order time
-            deliveryTime += Math.min(180, tOrder[i] + 180);
+            deliveryTime += 30 + rand.nextInt(180);
         }
-        tReq[i] = deliveryTime;
+        // Ensure the delivery time does not exceed 360 minutes (24:00)
+        tReq[i] = Math.min(closingTime, deliveryTime + tOrder[i]);
     }
     return tReq;
 }
+
 
 
    public void sortOrders() {
