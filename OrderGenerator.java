@@ -46,19 +46,32 @@ public class OrderGenerator {
 }
 
     public static int[] fillDesiredDeliveryTimes(int numOfOrders, int[] nPf) {
-        Random rand = new Random();
-        int[] tReq = new int[numOfOrders];
-        for (int i = 0; i < tReq.length; i++) {
-            int deliveryTime;
-            if (nPf[i] > 10) {
-                deliveryTime = 60 + rand.nextInt(121);
-            } else {
-                deliveryTime = 30 + rand.nextInt(151);
-            }
-            tReq[i] = deliveryTime;
+    Random rand = new Random();
+    int[] tReq = new int[numOfOrders];
+    // Define the opening and closing times in minutes from 18:00 to 24:00
+    int openingTime = 0; // 18:00
+    int closingTime = 360; // 24:00
+    // Define the mean and standard deviation for Gaussian distribution
+    double mean = 180; // Mean time in minutes (21:00)
+    double stdDev = 60; // Standard deviation
+
+    for (int i = 0; i < tReq.length; i++) {
+        // Generate a random value following Gaussian distribution
+        double gaussianTime = stdDev * rand.nextGaussian() + mean;
+        // Ensure the generated time is within the opening and closing hours
+        int deliveryTime = (int) Math.round(Math.max(openingTime, Math.min(closingTime, gaussianTime)));
+        // Adjust delivery time based on the number of pittas
+        if (nPf[i] > 10) {
+            // If the number of pittas is more than 10, delivery time can't be less than 60 minutes
+            deliveryTime += 30 + rand.nextInt(150); // Random additional time between 30 minutes to 3 hours
+        } else {
+            deliveryTime += 30 + rand.nextInt(180); // Random additional time between 30 minutes to 3 hours
         }
-        return tReq;
+        tReq[i] = deliveryTime;
     }
+    return tReq;
+}
+
 
    public void sortOrders() {
     for (int i = 0; i < num.length - 1; i++) {
