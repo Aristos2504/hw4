@@ -26,14 +26,24 @@ public class OrderGenerator {
     }
 
     public static int[] fillTimeOrder(int numOfOrders) {
-        Random rand = new Random();
-        int[] tOrder = new int[numOfOrders];
-        for (int i = 0; i < tOrder.length; i++) {
-            double gaussianTime = 60 * rand.nextGaussian() + 180;
-            tOrder[i] = (int) Math.round(gaussianTime);
-        }
-        return tOrder;
+    Random rand = new Random();
+    int[] tOrder = new int[numOfOrders];
+    // Define the opening and closing times in minutes from 18:00 to 23:00
+    int openingTime = 0; // 18:00
+    int closingTime = 300; // 23:00
+    // Define the mean and standard deviation for Gaussian distribution
+    double mean = 180; // Mean time in minutes (21:00)
+    double stdDev = 60; // Standard deviation
+
+    for (int i = 0; i < tOrder.length; i++) {
+        // Generate a random value following Gaussian distribution
+        double gaussianTime = stdDev * rand.nextGaussian() + mean;
+        // Ensure the generated time is within the opening and closing hours
+        int orderTime = (int) Math.round(Math.max(openingTime, Math.min(closingTime, gaussianTime)));
+        tOrder[i] = orderTime;
     }
+    return tOrder;
+}
 
     public static int[] fillDesiredDeliveryTimes(int numOfOrders, int[] nPf) {
         Random rand = new Random();
